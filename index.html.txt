@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linea Madison — Luxury Linen for Women</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        sand: '#E8DFD0',
+                        dune: '#C4A882',
+                        desert: '#B5976B',
+                        earth: '#8B7355',
+                        bark: '#6B5B45',
+                        linen: '#F5F0E8',
+                        warmgray: '#A69B8C',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #FDFBF7; color: #3D3529; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #FDFBF7; }
+        ::-webkit-scrollbar-thumb { background: #C4A882; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8B7355; }
+
+        .font-heading { font-family: 'Cormorant Garamond', serif; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+        @keyframes widthGrow {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+
+        .animate-fade-up { animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-fade-in { animation: fadeIn 1.5s ease forwards; }
+        .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
+        .animate-width-grow { animation: widthGrow 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== FIXED: Stronger hero overlay for text readability ===== */
+        .hero-overlay {
+            background: linear-gradient(
+                135deg,
+                rgba(253,251,247,0.97) 0%,
+                rgba(253,251,247,0.88) 30%,
+                rgba(253,251,247,0.55) 60%,
+                rgba(253,251,247,0.25) 100%
+            );
+        }
+
+        /* ===== FIXED: Nav text always visible ===== */
+        .nav-on-hero {
+            color: #6B5B45;
+            text-shadow: 0 0 20px rgba(253,251,247,0.9), 0 0 40px rgba(253,251,247,0.7);
+        }
+        .nav-on-hero:hover {
+            color: #3D3529;
+            text-shadow: 0 0 20px rgba(253,251,247,1), 0 0 40px rgba(253,251,247,0.8);
+        }
+        .nav-on-hero::after {
+            background: #6B5B45 !important;
+        }
+
+        /* Nav when scrolled (solid background) */
+        .nav-scrolled .nav-link-text {
+            color: #8B7355;
+            text-shadow: none;
+        }
+        .nav-scrolled .nav-link-text:hover {
+            color: #6B5B45;
+        }
+        .nav-scrolled .nav-logo-text {
+            text-shadow: none;
+        }
+
+        /* ===== FIXED: Hero text with strong shadows ===== */
+        .hero-title {
+            text-shadow: 0 2px 30px rgba(253,251,247,0.95), 0 4px 60px rgba(253,251,247,0.8);
+        }
+        .hero-subtitle {
+            text-shadow: 0 1px 20px rgba(253,251,247,0.95), 0 2px 40px rgba(253,251,247,0.8);
+        }
+        .hero-body {
+            text-shadow: 0 1px 15px rgba(253,251,247,0.95), 0 2px 30px rgba(253,251,247,0.7);
+        }
+
+        .line-accent {
+            width: 80px;
+            height: 1px;
+            background: #C4A882;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .collection-card:hover .collection-img {
+            transform: scale(1.06);
+        }
+        .collection-card:hover .collection-label {
+            letter-spacing: 0.3em;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #C4A882;
+            transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-cream">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" id="navLogo" class="font-heading text-2xl md:text-3xl font-light tracking-wider nav-on-hero nav-logo-text transition-colors duration-300">
+                    LINEA MADISON
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#collection" class="nav-link">
+                        <span class="nav-link-text nav-on-hero text-xs tracking-[0.2em] uppercase font-light transition-colors duration-300">Collection</span>
+                    </a>
+                    <a href="#gallery" class="nav-link">
+                        <span class="nav-link-text nav-on-hero text-xs tracking-[0.2em] uppercase font-light transition-colors duration-300">Gallery</span>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        <span class="nav-link-text nav-on-hero text-xs tracking-[0.2em] uppercase font-light transition-colors duration-300">About</span>
+                    </a>
+                    <a href="#contact" class="nav-link">
+                        <span class="nav-link-text nav-on-hero text-xs tracking-[0.2em] uppercase font-light transition-colors duration-300">Contact</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden" onclick="toggleMobileMenu()">
+                    <span id="menuIcon" class="iconify nav-on-hero transition-colors duration-300" data-icon="lucide:menu" data-width="24"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-cream/98 backdrop-blur-md border-t border-sand/30">
+            <div class="px-6 py-8 space-y-6">
+                <a href="#collection" onclick="toggleMobileMenu()" class="block text-xs tracking-[0.2em] uppercase text-earth font-light">Collection</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="block text-xs tracking-[0.2em] uppercase text-earth font-light">Gallery</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block text-xs tracking-[0.2em] uppercase text-earth font-light">About</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block text-xs tracking-[0.2em] uppercase text-earth font-light">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://z-cdn-media.chatglm.cn/files/7ffc9999-afe1-409a-9f40-e4e188e240fe.png?auth_key=1878771993-3cbc9970014f49f19f147426a687ac15-0-5c0bc760f5549dcdc7f040fba653c80d" 
+                 alt="Linea Madison Storefront" 
+                 class="w-full h-full object-cover animate-slow-zoom">
+            <!-- FIXED: Much stronger overlay so text is always readable -->
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+            <div class="max-w-2xl">
+                <div class="opacity-0 animate-fade-up" style="animation-delay: 0.3s; animation-fill-mode: forwards;">
+                    <p class="hero-subtitle text-xs tracking-[0.35em] uppercase text-desert mb-6 font-light">Luxury Linen — Crafted with Intention</p>
+                </div>
+                <h1 class="hero-title font-heading text-5xl md:text-7xl lg:text-8xl font-light leading-[0.95] tracking-tight text-bark opacity-0 animate-fade-up" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
+                    The Art of<br>
+                    <span class="italic text-desert">Effortless</span><br>
+                    Elegance
+                </h1>
+                <div class="opacity-0 animate-fade-up" style="animation-delay: 0.7s; animation-fill-mode: forwards;">
+                    <div class="line-accent mt-8 mb-6 animate-width-grow" style="animation-delay: 1s;"></div>
+                    <p class="hero-body text-sm md:text-base font-light text-earth leading-relaxed max-w-md">
+                        Premium linen collections designed for the modern woman who values timeless sophistication and natural beauty.
+                    </p>
+                </div>
+                <div class="opacity-0 animate-fade-up" style="animation-delay: 0.9s; animation-fill-mode: forwards;">
+                    <a href="#collection" class="inline-flex items-center gap-3 mt-8 group">
+                        <span class="hero-subtitle text-xs tracking-[0.25em] uppercase text-bark font-light group-hover:text-desert transition-colors duration-300">Explore Collection</span>
+                        <span class="w-10 h-10 rounded-full border border-dune/80 bg-cream/30 backdrop-blur-sm flex items-center justify-center group-hover:bg-dune/20 transition-all duration-300">
+                            <span class="iconify text-bark group-hover:text-desert" data-icon="lucide:arrow-down" data-width="14"></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in" style="animation-delay: 1.5s; animation-fill-mode: forwards;">
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-dune to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Brand Marquee -->
+    <div class="py-6 bg-linen border-y border-sand/30 overflow-hidden">
+        <div class="marquee-track">
+            <div class="flex items-center gap-12 whitespace-nowrap px-6">
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Linea Madison</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Luxury Linen</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Timeless Elegance</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Natural Fabrics</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Crafted with Care</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Linea Madison</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Luxury Linen</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Timeless Elegance</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Natural Fabrics</span>
+                <span class="text-dune/30">✦</span>
+                <span class="font-heading text-lg tracking-[0.3em] text-dune/40 uppercase">Crafted with Care</span>
+                <span class="text-dune/30">✦</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Section -->
+    <section id="collection" class="py-24 md:py-32 bg-cream">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="scroll-reveal text-center mb-16 md:mb-24">
+                <p class="text-xs tracking-[0.35em] uppercase text-desert mb-4 font-light">Our Collections</p>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-light text-bark tracking-tight">
+                    Curated in <span class="italic text-desert">Linen</span>
+                </h2>
+                <div class="line-accent mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="collection-card scroll-reveal group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer">
+                    <img src="https://z-cdn-media.chatglm.cn/files/fd13178c-8df0-427d-b511-283ab1a03be6.png?auth_key=1878771993-335f027ff7394c5dbdbef0148c11dda4-0-0cb53d75496158a21954a1b25d385d1c" 
+                         alt="Linen Fabric Collection" 
+                         class="collection-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bark/60 via-bark/10 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+                        <p class="text-xs tracking-[0.3em] uppercase text-sand/80 mb-2">Spring/Summer</p>
+                        <h3 class="font-heading text-3xl md:text-4xl font-light text-white">Fabric Stories</h3>
+                        <div class="collection-label mt-4 text-xs tracking-[0.2em] uppercase text-sand/70 transition-all duration-500 flex items-center gap-2">
+                            <span>Discover</span>
+                            <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collection-card scroll-reveal group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer" style="transition-delay: 0.15s;">
+                    <img src="https://z-cdn-media.chatglm.cn/files/471f4e50-c43d-43a9-b4d1-9e3cbbf96ebc.png?auth_key=1878771993-474ddef1f51b42f687819eb63ea72bff-0-cde39d90ff10e8f31f8a7c3980a3e826" 
+                         alt="Linen Textures & Tones" 
+                         class="collection-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bark/60 via-bark/10 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+                        <p class="text-xs tracking-[0.3em] uppercase text-sand/80 mb-2">Essential Edit</p>
+                        <h3 class="font-heading text-3xl md:text-4xl font-light text-white">Texture & Tone</h3>
+                        <div class="collection-label mt-4 text-xs tracking-[0.2em] uppercase text-sand/70 transition-all duration-500 flex items-center gap-2">
+                            <span>Discover</span>
+                            <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collection-card scroll-reveal group relative overflow-hidden rounded-2xl md:col-span-2 aspect-[21/9] cursor-pointer" style="transition-delay: 0.3s;">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e986d14a-ee74-48a1-9fc6-b7fa1329fb68.png?auth_key=1878771993-d2c7fb4316ec48339360e023847e0b4c-0-77f4e328953c64c2160832658895b3e1" 
+                         alt="Linea Madison Boutique" 
+                         class="collection-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bark/50 via-bark/5 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                        <p class="text-xs tracking-[0.3em] uppercase text-sand/80 mb-2">Visit Us</p>
+                        <h3 class="font-heading text-3xl md:text-5xl font-light text-white">The Boutique</h3>
+                        <div class="collection-label mt-4 text-xs tracking-[0.2em] uppercase text-sand/70 transition-all duration-500 flex items-center gap-2">
+                            <span>Explore</span>
+                            <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifestyle Gallery Section -->
+    <section id="gallery" class="py-24 md:py-32 bg-linen">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-24 gap-6">
+                <div>
+                    <p class="text-xs tracking-[0.35em] uppercase text-desert mb-4 font-light">Lifestyle</p>
+                    <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-light text-bark tracking-tight">
+                        Living in <span class="italic text-desert">Linen</span>
+                    </h2>
+                </div>
+                <p class="text-sm font-light text-earth/70 max-w-sm leading-relaxed">
+                    Every piece is designed to move with you — from quiet mornings at home to sunlit afternoons in the city.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+                <div class="gallery-item scroll-reveal md:col-span-7 relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer group">
+                    <img src="https://z-cdn-media.chatglm.cn/files/84e5295d-4629-4e78-80b4-6e4fbb8cf5ce.png?auth_key=1878771993-474c9e3657e44514b3a608579d1ccb43-0-ac18650f1c767815c1fd1e9e5ac3efe5" 
+                         alt="Linen Lifestyle" 
+                         class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                    <div class="absolute top-6 left-6">
+                        <span class="bg-cream/90 backdrop-blur-sm px-4 py-2 rounded-full text-xs tracking-[0.15em] uppercase text-earth font-light">At Home</span>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 flex flex-col gap-4 md:gap-6">
+                    <div class="gallery-item scroll-reveal relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer group" style="transition-delay: 0.15s;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/7ffc9999-afe1-409a-9f40-e4e188e240fe.png?auth_key=1878771993-3cbc9970014f49f19f147426a687ac15-0-5c0bc760f5549dcdc7f040fba653c80d" 
+                             alt="Linea Madison Window" 
+                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                        <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                        <div class="absolute top-6 left-6">
+                            <span class="bg-cream/90 backdrop-blur-sm px-4 py-2 rounded-full text-xs tracking-[0.15em] uppercase text-earth font-light">Boutique</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item scroll-reveal relative overflow-hidden rounded-2xl aspect-[3/2] cursor-pointer group" style="transition-delay: 0.3s;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/fd13178c-8df0-427d-b511-283ab1a03be6.png?auth_key=1878771993-335f027ff7394c5dbdbef0148c11dda4-0-0cb53d75496158a21954a1b25d385d1c" 
+                             alt="Linen Textures" 
+                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                        <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                        <div class="absolute top-6 left-6">
+                            <span class="bg-cream/90 backdrop-blur-sm px-4 py-2 rounded-full text-xs tracking-[0.15em] uppercase text-earth font-light">Textures</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
+                <div class="gallery-item scroll-reveal relative overflow-hidden rounded-2xl aspect-square cursor-pointer group">
+                    <img src="https://z-cdn-media.chatglm.cn/files/471f4e50-c43d-43a9-b4d1-9e3cbbf96ebc.png?auth_key=1878771993-474ddef1f51b42f687819eb63ea72bff-0-cde39d90ff10e8f31f8a7c3980a3e826" 
+                         alt="Curated Details" 
+                         class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                </div>
+                <div class="gallery-item scroll-reveal relative overflow-hidden rounded-2xl aspect-square cursor-pointer group" style="transition-delay: 0.1s;">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e986d14a-ee74-48a1-9fc6-b7fa1329fb68.png?auth_key=1878771993-d2c7fb4316ec48339360e023847e0b4c-0-77f4e328953c64c2160832658895b3e1" 
+                         alt="Storefront Details" 
+                         class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                </div>
+                <div class="gallery-item scroll-reveal relative overflow-hidden rounded-2xl aspect-square cursor-pointer group hidden md:block" style="transition-delay: 0.2s;">
+                    <img src="https://z-cdn-media.chatglm.cn/files/84e5295d-4629-4e78-80b4-6e4fbb8cf5ce.png?auth_key=1878771993-474c9e3657e44514b3a608579d1ccb43-0-ac18650f1c767815c1fd1e9e5ac3efe5" 
+                         alt="Living in Linen" 
+                         class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out">
+                    <div class="gallery-overlay absolute inset-0 bg-bark/20 opacity-0 transition-opacity duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-20 md:py-28 bg-cream relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03]">
+            <img src="https://z-cdn-media.chatglm.cn/files/471f4e50-c43d-43a9-b4d1-9e3cbbf96ebc.png?auth_key=1878771993-474ddef1f51b42f687819eb63ea72bff-0-cde39d90ff10e8f31f8a7c3980a3e826" 
+                 alt="" class="w-full h-full object-cover" aria-hidden="true">
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center scroll-reveal">
+            <span class="iconify text-dune/40 mb-8 mx-auto" data-icon="lucide:quote" data-width="40"></span>
+            <blockquote class="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-bark leading-snug italic">
+                Linen is not just a fabric — it is a philosophy of living gently, beautifully, and with purpose.
+            </blockquote>
+            <div class="line-accent mx-auto mt-8 mb-4"></div>
+            <p class="text-xs tracking-[0.3em] uppercase text-desert font-light">Linea Madison</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 bg-linen">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+                <div class="scroll-reveal relative">
+                    <div class="relative overflow-hidden rounded-2xl aspect-[3/4]">
+                        <img src="https://z-cdn-media.chatglm.cn/files/84e5295d-4629-4e78-80b4-6e4fbb8cf5ce.png?auth_key=1878771993-474c9e3657e44514b3a608579d1ccb43-0-ac18650f1c767815c1fd1e9e5ac3efe5" 
+                             alt="About Linea Madison" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 border border-dune/30 rounded-2xl -z-10"></div>
+                    <div class="absolute -top-4 -left-4 bg-cream px-5 py-3 rounded-xl shadow-sm border border-sand/30">
+                        <p class="font-heading text-3xl font-light text-bark">Est.</p>
+                        <p class="text-xs tracking-[0.2em] text-desert uppercase">Craftsmanship</p>
+                    </div>
+                </div>
+
+                <div class="scroll-reveal" style="transition-delay: 0.2s;">
+                    <p class="text-xs tracking-[0.35em] uppercase text-desert mb-4 font-light">Our Story</p>
+                    <h2 class="font-heading text-4xl md:text-5xl font-light text-bark tracking-tight mb-8">
+                        Woven with <span class="italic text-desert">Soul</span>
+                    </h2>
+                    <div class="line-accent mb-8"></div>
+
+                    <div class="space-y-6">
+                        <p class="text-sm md:text-base font-light text-earth/80 leading-relaxed">
+                            Linea Madison was born from a deep reverence for linen — the world's oldest and most sustainable textile. We believe that true luxury lies in simplicity, in the gentle touch of natural fibers against the skin, and in garments that grow more beautiful with time.
+                        </p>
+                        <p class="text-sm md:text-base font-light text-earth/80 leading-relaxed">
+                            Every piece in our collection is thoughtfully designed to celebrate the female form with relaxed silhouettes, organic textures, and a palette inspired by sun-washed landscapes and Mediterranean earth.
+                        </p>
+                        <p class="text-sm md:text-base font-light text-earth/80 leading-relaxed">
+                            From the sourcing of premium European flax to the final stitch, our commitment to quality and sustainability guides every decision we make. This is fashion that feels as good as it looks — honest, intentional, and enduring.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-sand/40">
+                        <div>
+                            <span class="iconify text-dune mb-3" data-icon="lucide:leaf" data-width="20"></span>
+                            <p class="text-xs tracking-[0.15em] uppercase text-bark font-light">Natural</p>
+                            <p class="text-xs text-warmgray mt-1">European Flax</p>
+                        </div>
+                        <div>
+                            <span class="iconify text-dune mb-3" data-icon="lucide:hand-heart" data-width="20"></span>
+                            <p class="text-xs tracking-[0.15em] uppercase text-bark font-light">Ethical</p>
+                            <p class="text-xs text-warmgray mt-1">Fair Practices</p>
+                        </div>
+                        <div>
+                            <span class="iconify text-dune mb-3" data-icon="lucide:infinity" data-width="20"></span>
+                            <p class="text-xs tracking-[0.15em] uppercase text-bark font-light">Timeless</p>
+                            <p class="text-xs text-warmgray mt-1">Made to Last</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32 bg-cream relative">
+        <div class="absolute inset-0 opacity-[0.02]">
+            <img src="https://z-cdn-media.chatglm.cn/files/fd13178c-8df0-427d-b511-283ab1a03be6.png?auth_key=1878771993-335f027ff7394c5dbdbef0148c11dda4-0-0cb53d75496158a21954a1b25d385d1c" 
+                 alt="" class="w-full h-full object-cover" aria-hidden="true">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+            <div class="scroll-reveal">
+                <p class="text-xs tracking-[0.35em] uppercase text-desert mb-4 font-light">Get in Touch</p>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-light text-bark tracking-tight">
+                    Let's <span class="italic text-desert">Connect</span>
+                </h2>
+                <div class="line-accent mx-auto mt-6 mb-6"></div>
+                <p class="text-sm font-light text-earth/70 max-w-md mx-auto leading-relaxed mb-16">
+                    We'd love to hear from you. Reach out through any of the channels below — whether it's a question, collaboration, or simply to say hello.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 scroll-reveal" style="transition-delay: 0.2s;">
+                <a href="https://tiktok.com/@lineamadison" target="_blank" rel="noopener noreferrer"
+                   class="group bg-white/70 backdrop-blur-sm border border-sand/40 rounded-2xl p-8 hover:shadow-lg hover:shadow-dune/10 hover:border-dune/40 transition-all duration-500">
+                    <div class="w-14 h-14 rounded-full bg-linen flex items-center justify-center mx-auto mb-5 group-hover:bg-dune/10 transition-colors duration-500">
+                        <svg class="w-6 h-6 text-desert group-hover:text-bark transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15z"/>
+                        </svg>
+                    </div>
+                    <p class="text-xs tracking-[0.2em] uppercase text-warmgray mb-2">TikTok</p>
+                    <p class="font-heading text-xl text-bark font-light">@lineamadison</p>
+                </a>
+
+                <a href="https://wa.me/212660166279" target="_blank" rel="noopener noreferrer"
+                   class="group bg-white/70 backdrop-blur-sm border border-sand/40 rounded-2xl p-8 hover:shadow-lg hover:shadow-dune/10 hover:border-dune/40 transition-all duration-500">
+                    <div class="w-14 h-14 rounded-full bg-linen flex items-center justify-center mx-auto mb-5 group-hover:bg-dune/10 transition-colors duration-500">
+                        <span class="iconify w-6 h-6 text-desert group-hover:text-bark transition-colors duration-300" data-icon="lucide:message-circle" data-width="24"></span>
+                    </div>
+                    <p class="text-xs tracking-[0.2em] uppercase text-warmgray mb-2">WhatsApp</p>
+                    <p class="font-heading text-xl text-bark font-light">+212 660 166 279</p>
+                </a>
+
+                <a href="mailto:khouloudrad34@gmail.com"
+                   class="group bg-white/70 backdrop-blur-sm border border-sand/40 rounded-2xl p-8 hover:shadow-lg hover:shadow-dune/10 hover:border-dune/40 transition-all duration-500">
+                    <div class="w-14 h-14 rounded-full bg-linen flex items-center justify-center mx-auto mb-5 group-hover:bg-dune/10 transition-colors duration-500">
+                        <span class="iconify w-6 h-6 text-desert group-hover:text-bark transition-colors duration-300" data-icon="lucide:mail" data-width="24"></span>
+                    </div>
+                    <p class="text-xs tracking-[0.2em] uppercase text-warmgray mb-2">Email</p>
+                    <p class="font-heading text-lg text-bark font-light break-all">khouloudrad34@gmail.com</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-bark text-sand/80 py-16 md:py-20">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5">
+                    <h3 class="font-heading text-3xl font-light text-white tracking-wider mb-4">LINEA MADISON</h3>
+                    <div class="w-10 h-px bg-dune/40 mb-4"></div>
+                    <p class="text-sm font-light text-sand/60 leading-relaxed max-w-sm">
+                        Luxury linen clothing crafted for the modern woman. Timeless elegance, natural beauty, sustainable fashion.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3">
+                    <p class="text-xs tracking-[0.25em] uppercase text-dune/80 mb-4">Navigate</p>
+                    <div class="space-y-3">
+                        <a href="#collection" class="block text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">Collection</a>
+                        <a href="#gallery" class="block text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">Gallery</a>
+                        <a href="#about" class="block text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">About</a>
+                        <a href="#contact" class="block text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4">
+                    <p class="text-xs tracking-[0.25em] uppercase text-dune/80 mb-4">Connect</p>
+                    <div class="space-y-3">
+                        <a href="https://tiktok.com/@lineamadison" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15z"/></svg>
+                            @lineamadison
+                        </a>
+                        <a href="https://wa.me/212660166279" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">
+                            <span class="iconify" data-icon="lucide:message-circle" data-width="16"></span>
+                            +212 660 166 279
+                        </a>
+                        <a href="mailto:khouloudrad34@gmail.com" class="flex items-center gap-3 text-sm font-light text-sand/50 hover:text-sand transition-colors duration-300">
+                            <span class="iconify" data-icon="lucide:mail" data-width="16"></span>
+                            khouloudrad34@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-px bg-sand/10 mb-8"></div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs font-light text-sand/30">© 2025 Linea Madison. All rights reserved.</p>
+                <p class="text-xs font-light text-sand/30">Crafted with love & linen</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== FIXED: Better navbar scroll handling =====
+        const navbar = document.getElementById('navbar');
+        const navLogo = document.getElementById('navLogo');
+        const menuIcon = document.getElementById('menuIcon');
+        const navLinkTexts = document.querySelectorAll('.nav-link-text');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const isScrolled = currentScroll > 80;
+
+            if (isScrolled) {
+                // Solid background — no shadow needed on text
+                navbar.style.background = 'rgba(253, 251, 247, 0.96)';
+                navbar.style.backdropFilter = 'blur(16px)';
+                navbar.style.borderBottom = '1px solid rgba(232, 223, 208, 0.4)';
+                navbar.classList.add('nav-scrolled');
+
+                navLogo.classList.remove('nav-on-hero');
+                navLogo.style.color = '#6B5B45';
+                navLogo.style.textShadow = 'none';
+
+                menuIcon.style.color = '#6B5B45';
+                menuIcon.style.textShadow = 'none';
+
+                navLinkTexts.forEach(link => {
+                    link.classList.remove('nav-on-hero');
+                    link.style.color = '#8B7355';
+                    link.style.textShadow = 'none';
+                });
+            } else {
+                // Over hero — add glow shadows for visibility
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.borderBottom = 'none';
+                navbar.classList.remove('nav-scrolled');
+
+                navLogo.classList.add('nav-on-hero');
+                navLogo.style.color = '#6B5B45';
+                navLogo.style.textShadow = '0 0 20px rgba(253,251,247,0.95), 0 0 40px rgba(253,251,247,0.8), 0 1px 3px rgba(253,251,247,0.9)';
+
+                menuIcon.style.color = '#6B5B45';
+                menuIcon.style.textShadow = '0 0 20px rgba(253,251,247,0.95), 0 0 40px rgba(253,251,247,0.8)';
+
+                navLinkTexts.forEach(link => {
+                    link.classList.add('nav-on-hero');
+                    link.style.color = '#6B5B45';
+                    link.style.textShadow = '0 0 20px rgba(253,251,247,0.95), 0 0 40px rgba(253,251,247,0.8), 0 1px 3px rgba(253,251,247,0.9)';
+                });
+            }
+        });
+
+        // Set initial state on load
+        window.dispatchEvent(new Event('scroll'));
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -60px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
